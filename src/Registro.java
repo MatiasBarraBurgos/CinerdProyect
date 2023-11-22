@@ -56,7 +56,7 @@ Connection cn=con.ConectarBD();
             }
         });
 
-        combotipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Administrador", "Cliente" }));
+        combotipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Cliente" }));
         combotipo.setBorder(javax.swing.BorderFactory.createTitledBorder("Tipo de usuario"));
         combotipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
