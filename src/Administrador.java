@@ -1,24 +1,134 @@
-public class Administrador extends javax.swing.JDialog {
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 
-    /**
-     * Creates new form Administrador
-     * @param parent
-     * @param modal
-     */
- 
+public class Administrador extends javax.swing.JDialog {
+    private String peliculaSeleccionada;
 
     public Administrador(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        bloquearControlesIniciales();
     }
 
-  public Administrador() {
+    public Administrador() {
         super(new javax.swing.JFrame(), true);
         initComponents();
+        bloquearControlesIniciales();
     }
-  
 
+    private void bloquearControlesIniciales() {
+        JComboSeleccion1.setEnabled(false);
+        JComboSeleccion2.setEnabled(false);
+        JComboSeleccion3.setEnabled(false);
 
+        JhorarioNap.setEnabled(false);
+        JhorarioNap2.setEnabled(false);
+        JhorarioNap3.setEnabled(false);
+
+        JhorarioWon1.setEnabled(false);
+        JhorarioWon2.setEnabled(false);
+        JhorarioWon3.setEnabled(false);
+
+        JhorarioAq1.setEnabled(false);
+        JhorarioAq2.setEnabled(false);
+        JhorarioAq3.setEnabled(false);
+
+        JSiguientePantalla.setEnabled(false);
+
+        Jpelicula1.setEnabled(false);
+        Jpelicula2.setEnabled(false);
+        Jpelicula3.setEnabled(false);
+    }
+
+    private void desbloquearControlesPeliculas() {
+        JComboSeleccion1.setEnabled(true);
+        JComboSeleccion2.setEnabled(true);
+        JComboSeleccion3.setEnabled(true);
+
+        Jpelicula1.setEnabled(true);
+        Jpelicula2.setEnabled(true);
+        Jpelicula3.setEnabled(true);
+    }
+
+    private void relacionarHorariosConPelicula1() {
+        JhorarioNap.setEnabled(true);
+        JhorarioNap2.setEnabled(true);
+        JhorarioNap3.setEnabled(true);
+    }
+
+    private void relacionarHorariosConPelicula2() {
+        JhorarioWon1.setEnabled(true);
+        JhorarioWon2.setEnabled(true);
+        JhorarioWon3.setEnabled(true);
+    }
+
+    private void relacionarHorariosConPelicula3() {
+        JhorarioAq1.setEnabled(true);
+        JhorarioAq2.setEnabled(true);
+        JhorarioAq3.setEnabled(true);
+    }
+
+    private void bloquearHorariosNoRelacionados() {
+        if ("Pelicula 1 (Napoleon)".equals(peliculaSeleccionada)) {
+            bloquearHorariosNoRelacionadosConPelicula1();
+            bloquearPelicula2y3();
+        } else if ("Pelicula 2".equals(peliculaSeleccionada)) {
+            bloquearHorariosNoRelacionadosConPelicula2();
+            bloquearPelicula1y3();
+        } else if ("Pelicula 3".equals(peliculaSeleccionada)) {
+            bloquearHorariosNoRelacionadosConPelicula3();
+            bloquearPelicula1y2();
+        }
+    }
+private void bloquearHorariosNoRelacionadosConPelicula1() {
+    JhorarioNap.setEnabled(true);
+    JhorarioNap2.setEnabled(false);
+    JhorarioNap3.setEnabled(false);
+    JhorarioWon1.setEnabled(false);
+    JhorarioWon2.setEnabled(true);
+    JhorarioWon3.setEnabled(true);
+    JhorarioAq1.setEnabled(false);
+    JhorarioAq2.setEnabled(true);
+    JhorarioAq3.setEnabled(true);
+}
+
+private void bloquearHorariosNoRelacionadosConPelicula2() {
+    JhorarioNap.setEnabled(false);
+    JhorarioNap2.setEnabled(true);
+    JhorarioNap3.setEnabled(true);
+    JhorarioWon1.setEnabled(true);
+    JhorarioWon2.setEnabled(false);
+    JhorarioWon3.setEnabled(true);
+    JhorarioAq1.setEnabled(true);
+    JhorarioAq2.setEnabled(false);
+    JhorarioAq3.setEnabled(true);
+}
+
+private void bloquearHorariosNoRelacionadosConPelicula3() {
+    JhorarioNap.setEnabled(false);
+    JhorarioNap2.setEnabled(true);
+    JhorarioNap3.setEnabled(true);
+    JhorarioWon1.setEnabled(true);
+    JhorarioWon2.setEnabled(true);
+    JhorarioWon3.setEnabled(false);
+    JhorarioAq1.setEnabled(true);
+    JhorarioAq2.setEnabled(true);
+    JhorarioAq3.setEnabled(false);
+}
+private void bloquearPelicula1y3() {
+    Jpelicula1.setEnabled(false);
+    Jpelicula3.setEnabled(false);
+}
+
+private void bloquearPelicula2y3() {
+    Jpelicula2.setEnabled(false);
+    Jpelicula3.setEnabled(false);
+}
+
+private void bloquearPelicula1y2() {
+    Jpelicula1.setEnabled(false);
+    Jpelicula2.setEnabled(false);
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -48,9 +158,9 @@ public class Administrador extends javax.swing.JDialog {
         JComboSeleccion2 = new javax.swing.JComboBox<>();
         JComboSeleccion3 = new javax.swing.JComboBox<>();
         JSiguientePantalla = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        Jpelicula1 = new javax.swing.JButton();
+        Jpelicula2 = new javax.swing.JButton();
+        Jpelicula3 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -201,6 +311,11 @@ public class Administrador extends javax.swing.JDialog {
         });
 
         JComboSeleccion1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar sala", "2D", "3D", "3DXD" }));
+        JComboSeleccion1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JComboSeleccion1ActionPerformed(evt);
+            }
+        });
 
         JComboSeleccion2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar Sala", "2D", "3D", "3DXD" }));
 
@@ -208,14 +323,29 @@ public class Administrador extends javax.swing.JDialog {
 
         JSiguientePantalla.setText("Ir a seleccion de asientos");
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/napoleon-thai-movie-poster-sm.jpg"))); // NOI18N
-        jButton1.setText("Pelicula 1");
+        Jpelicula1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/napoleon-thai-movie-poster-sm.jpg"))); // NOI18N
+        Jpelicula1.setText("Pelicula 1");
+        Jpelicula1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Jpelicula1ActionPerformed(evt);
+            }
+        });
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/wonka_99581 (1).jpg"))); // NOI18N
-        jButton2.setText("Pelicula 2");
+        Jpelicula2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/wonka_99581 (1).jpg"))); // NOI18N
+        Jpelicula2.setText("Pelicula 2");
+        Jpelicula2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Jpelicula2ActionPerformed(evt);
+            }
+        });
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/aquaman_y_el_reino_perdido_99744 (1).jpg"))); // NOI18N
-        jButton3.setText("Pelicula 3");
+        Jpelicula3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/aquaman_y_el_reino_perdido_99744 (1).jpg"))); // NOI18N
+        Jpelicula3.setText("Pelicula 3");
+        Jpelicula3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Jpelicula3ActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
         jLabel2.setText("Napoleon");
@@ -254,9 +384,9 @@ public class Administrador extends javax.swing.JDialog {
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(52, 52, 52)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(Jpelicula2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(Jpelicula1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Jpelicula3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -324,7 +454,7 @@ public class Administrador extends javax.swing.JDialog {
                                 .addComponent(JhorarioNap2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(JhorarioNap3))
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Jpelicula1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -334,7 +464,7 @@ public class Administrador extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(Jpelicula2, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(30, 30, 30)
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -342,7 +472,7 @@ public class Administrador extends javax.swing.JDialog {
                         .addComponent(jLabel10)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Jpelicula3, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -394,6 +524,29 @@ public class Administrador extends javax.swing.JDialog {
     }//GEN-LAST:event_JsalaActionPerformed
 
     private void JpeliculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JpeliculaActionPerformed
+ System.out.println("Evento generado por: " + evt.getSource());
+
+    desbloquearControlesPeliculas();
+
+    peliculaSeleccionada = (String) ((JButton) evt.getSource()).getText();
+    
+    switch (peliculaSeleccionada) {
+        case "Pelicula 1 (Napoleon)":
+            relacionarHorariosConPelicula1();
+            break;
+        case "Pelicula 2":
+            relacionarHorariosConPelicula2();
+            break;
+        case "Pelicula 3":
+            relacionarHorariosConPelicula3();
+            break;
+        default:
+            break;
+    }
+
+    bloquearHorariosNoRelacionados();
+
+
 
     }//GEN-LAST:event_JpeliculaActionPerformed
 
@@ -433,6 +586,28 @@ public class Administrador extends javax.swing.JDialog {
     private void JhorarioAq3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JhorarioAq3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_JhorarioAq3ActionPerformed
+
+    private void JComboSeleccion1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JComboSeleccion1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JComboSeleccion1ActionPerformed
+
+    private void Jpelicula3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Jpelicula3ActionPerformed
+       desbloquearControlesPeliculas();
+        peliculaSeleccionada = "Pelicula 3 (Aquaman)";
+        relacionarHorariosConPelicula3();
+    }//GEN-LAST:event_Jpelicula3ActionPerformed
+
+    private void Jpelicula1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Jpelicula1ActionPerformed
+desbloquearControlesPeliculas();
+        peliculaSeleccionada = "Pelicula 1 (Napoleon)";
+        relacionarHorariosConPelicula1();
+    }//GEN-LAST:event_Jpelicula1ActionPerformed
+
+    private void Jpelicula2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Jpelicula2ActionPerformed
+        desbloquearControlesPeliculas();
+        peliculaSeleccionada = "Pelicula 2 (Wonka)";
+        relacionarHorariosConPelicula2();
+    }//GEN-LAST:event_Jpelicula2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -489,10 +664,10 @@ public class Administrador extends javax.swing.JDialog {
     private javax.swing.JButton JhorarioWon3;
     private javax.swing.JButton Jhorarios;
     private javax.swing.JButton Jpelicula;
+    private javax.swing.JButton Jpelicula1;
+    private javax.swing.JButton Jpelicula2;
+    private javax.swing.JButton Jpelicula3;
     private javax.swing.JButton Jsala;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
