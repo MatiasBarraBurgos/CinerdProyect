@@ -23,6 +23,8 @@ public class SeleccionDeAsientos extends JFrame {
         this.horarioSeleccionado = horario;
         this.salaSeleccionada = sala;
         actualizarInfoPelicula();
+        
+        
     }
 
     public SeleccionDeAsientos() {
