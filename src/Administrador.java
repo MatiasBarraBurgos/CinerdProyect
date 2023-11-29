@@ -471,12 +471,40 @@ private boolean verificarRelacion() {
             {
            
     }
+            
             // Bloquear horarios no relacionados antes de mostrar el mensaje
-            bloquearHorariosNoRelacionados();
-            JOptionPane.showMessageDialog(this, "Reserva realizada:\n" +
-                    "Pelicula: " + peliculaSeleccionada + "\n" +
-                    "Horario: " + horarioSeleccionado + "\n" +
-                    "Sala: " + salaSeleccionada, "Reserva realizada", JOptionPane.INFORMATION_MESSAGE);
+          bloquearHorariosNoRelacionados();
+
+Object[] options = {"Ir a Selección de Asientos", "Cancelar Reserva"};
+int choice = JOptionPane.showOptionDialog(
+        this,
+        "Reserva realizada:\n" +
+                "Pelicula: " + peliculaSeleccionada + "\n" +
+                "Horario: " + horarioSeleccionado + "\n" +
+                "Sala: " + salaSeleccionada,
+        "Reserva realizada",
+        JOptionPane.DEFAULT_OPTION,
+        JOptionPane.INFORMATION_MESSAGE,
+        null,
+        options,
+        options[0]
+);
+
+if (choice == 0) {
+    // Llamar al método setInfoPelicula para establecer la información de la película
+    SeleccionDeAsientos seleccionDeAsientos = new SeleccionDeAsientos();
+    seleccionDeAsientos.setInfoPelicula(peliculaSeleccionada, horarioSeleccionado, salaSeleccionada);
+
+    // Mostrar la ventana SeleccionDeAsientos
+    seleccionDeAsientos.setVisible(true);
+
+    // Cerrar la ventana Administrador
+    dispose();
+} else if (choice == 1) {
+    // Lógica para cancelar la reserva (si es necesario)
+    cancelarReserva();
+
+}
         } else {
             JOptionPane.showMessageDialog(this, "El horario y la sala no están relacionados con la película seleccionada.", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -484,6 +512,17 @@ private boolean verificarRelacion() {
         JOptionPane.showMessageDialog(this, "Primero selecciona una película, un horario y una sala.", "Error", JOptionPane.ERROR_MESSAGE);
     }
         guardarReservaEnBaseDeDatos(); 
+     
+       
+}
+ private void cancelarReserva() {
+    // Lógica para cancelar la reserva
+
+    // Desbloquear horarios que se bloquearon durante la reserva
+    bloquearControlesIniciales();
+
+    // Mostrar un mensaje indicando que la reserva ha sido cancelada
+    JOptionPane.showMessageDialog(this, "Reserva cancelada", "Cancelación de Reserva", JOptionPane.INFORMATION_MESSAGE);
 }
  
  private void guardarReservaEnBaseDeDatos() {
@@ -569,6 +608,8 @@ private boolean verificarRelacion() {
     // Puedes ajustar cómo deseas mostrar los detalles, aquí se usa un cuadro de diálogo
     JOptionPane.showMessageDialog(this, detalles, "Detalles de la Película", JOptionPane.INFORMATION_MESSAGE);
 }
+ 
+  
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -583,10 +624,10 @@ private boolean verificarRelacion() {
         jScrollPane2 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        Jdetallesdepelicula = new javax.swing.JButton();
         Jpelicula = new javax.swing.JButton();
-        JhorarioButton = new javax.swing.JButton();
         jLabel20 = new javax.swing.JLabel();
+        Jdetallepelicula = new javax.swing.JButton();
+        jLabel21 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         JhorarioNap = new javax.swing.JButton();
@@ -601,7 +642,6 @@ private boolean verificarRelacion() {
         JComboSeleccion1 = new javax.swing.JComboBox<>();
         JComboSeleccion2 = new javax.swing.JComboBox<>();
         JComboSeleccion3 = new javax.swing.JComboBox<>();
-        JSiguientePantalla = new javax.swing.JButton();
         Jpelicula1 = new javax.swing.JButton();
         Jpelicula2 = new javax.swing.JButton();
         Jpelicula3 = new javax.swing.JButton();
@@ -646,15 +686,6 @@ private boolean verificarRelacion() {
         jPanel2.setBackground(new java.awt.Color(0, 51, 51));
         jPanel2.setBorder(javax.swing.BorderFactory.createCompoundBorder());
 
-        Jdetallesdepelicula.setBackground(new java.awt.Color(0, 102, 102));
-        Jdetallesdepelicula.setForeground(new java.awt.Color(255, 255, 255));
-        Jdetallesdepelicula.setText("Detalles de Pelicula");
-        Jdetallesdepelicula.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JdetallesdepeliculaActionPerformed(evt);
-            }
-        });
-
         Jpelicula.setBackground(new java.awt.Color(0, 102, 102));
         Jpelicula.setForeground(new java.awt.Color(255, 255, 255));
         Jpelicula.setText("Pelicula");
@@ -664,48 +695,55 @@ private boolean verificarRelacion() {
             }
         });
 
-        JhorarioButton.setBackground(new java.awt.Color(0, 102, 102));
-        JhorarioButton.setForeground(new java.awt.Color(255, 255, 255));
-        JhorarioButton.setText("Seleccon/deseleccion horario");
-        JhorarioButton.addActionListener(new java.awt.event.ActionListener() {
+        jLabel20.setBackground(new java.awt.Color(0, 102, 102));
+        jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cintacine-removebg-preview (1).png"))); // NOI18N
+        jLabel20.setText("jLabel20");
+
+        Jdetallepelicula.setBackground(new java.awt.Color(0, 102, 102));
+        Jdetallepelicula.setForeground(new java.awt.Color(255, 255, 255));
+        Jdetallepelicula.setText("Sinopsis de pelicula");
+        Jdetallepelicula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JhorarioButtonActionPerformed(evt);
+                JdetallepeliculaActionPerformed(evt);
             }
         });
 
-        jLabel20.setBackground(new java.awt.Color(0, 102, 102));
-        jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/NombreGif.gif"))); // NOI18N
-        jLabel20.setText("jLabel20");
+        jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Macotaoficial.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(Jdetallesdepelicula, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(Jpelicula, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(JhorarioButton, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE))
-                        .addGap(46, 46, 46))
+                        .addComponent(Jdetallepelicula, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(55, 55, 55))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(17, 17, 17))))
+                        .addComponent(Jpelicula, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(51, 51, 51))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(84, 84, 84)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(Jpelicula, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(61, 61, 61)
-                .addComponent(Jdetallesdepelicula, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(66, 66, 66)
-                .addComponent(JhorarioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(127, 127, 127))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(Jdetallepelicula, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(57, 57, 57)
+                .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 559, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jPanel3.setBackground(new java.awt.Color(0, 51, 51));
@@ -813,8 +851,6 @@ private boolean verificarRelacion() {
                 JComboSeleccion3ActionPerformed(evt);
             }
         });
-
-        JSiguientePantalla.setText("Ir a seleccion de asientos");
 
         Jpelicula1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/napoleon-thai-movie-poster-sm.jpg"))); // NOI18N
         Jpelicula1.setText("Pelicula 1");
@@ -1089,11 +1125,7 @@ private boolean verificarRelacion() {
                             .addComponent(JhorarioNdp3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(JhorarioNdp2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(JhorarioNdp1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(723, 723, 723))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(JSiguientePantalla)
-                        .addGap(98, 98, 98))))
+                        .addGap(723, 723, 723))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1216,11 +1248,8 @@ private boolean verificarRelacion() {
                                         .addComponent(JhorarioWhish3))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(25, 25, 25)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(jLabel17)
-                                            .addComponent(JSiguientePantalla, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addGap(20, 20, 20)))))
+                                        .addGap(35, 35, 35)
+                                        .addComponent(jLabel17)))))))
                 .addGap(101, 101, 101))
         );
 
@@ -1232,7 +1261,7 @@ private boolean verificarRelacion() {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1553, Short.MAX_VALUE)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1400, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1241,10 +1270,6 @@ private boolean verificarRelacion() {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void JhorarioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JhorarioButtonActionPerformed
-// Desseleccionar el último botón seleccionado
-    }//GEN-LAST:event_JhorarioButtonActionPerformed
 
     private void JpeliculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JpeliculaActionPerformed
   System.out.println("Evento generado por: " + evt.getSource());
@@ -1558,10 +1583,9 @@ private boolean verificarRelacion() {
     }
     }//GEN-LAST:event_JComboSeleccion6ActionPerformed
 
-    private void JdetallesdepeliculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JdetallesdepeliculaActionPerformed
-         mostrarSinopsisPelicula();
-        
-    }//GEN-LAST:event_JdetallesdepeliculaActionPerformed
+    private void JdetallepeliculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JdetallepeliculaActionPerformed
+       mostrarSinopsisPelicula();
+    }//GEN-LAST:event_JdetallepeliculaActionPerformed
                                                         
    
 
@@ -1611,12 +1635,10 @@ private boolean verificarRelacion() {
     private javax.swing.JComboBox<String> JComboSeleccion4;
     private javax.swing.JComboBox<String> JComboSeleccion5;
     private javax.swing.JComboBox<String> JComboSeleccion6;
-    private javax.swing.JButton JSiguientePantalla;
-    private javax.swing.JButton Jdetallesdepelicula;
+    private javax.swing.JButton Jdetallepelicula;
     private javax.swing.JButton JhorarioAq1;
     private javax.swing.JButton JhorarioAq2;
     private javax.swing.JButton JhorarioAq3;
-    private javax.swing.JButton JhorarioButton;
     private javax.swing.JButton JhorarioNap;
     private javax.swing.JButton JhorarioNap2;
     private javax.swing.JButton JhorarioNap3;
@@ -1652,6 +1674,7 @@ private boolean verificarRelacion() {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
