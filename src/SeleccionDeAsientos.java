@@ -17,14 +17,14 @@ public class SeleccionDeAsientos extends JFrame {
     private JButton[][] asientos;
     private JLabel montoTotalLabel;
     private JLabel infoPeliculaLabel;
-
+   
     public void setInfoPelicula(String nombre, String horario, String sala) {
         this.peliculaSeleccionada = nombre;
         this.horarioSeleccionado = horario;
         this.salaSeleccionada = sala;
         actualizarInfoPelicula();
         
-        
+    
     }
 
     public SeleccionDeAsientos() {
@@ -173,7 +173,7 @@ public class SeleccionDeAsientos extends JFrame {
     }
 
     private void actualizarInfoPelicula() {
-        infoPeliculaLabel.setText("Película: " + peliculaSeleccionada + " | Horario: " + horarioSeleccionado + " | Sala: " + salaSeleccionada);
+        infoPeliculaLabel.setText("Película: " + peliculaSeleccionada + " -  Horario: " + horarioSeleccionado + " -  Sala: " + salaSeleccionada);
     }
 
     public static void main(String[] args) {

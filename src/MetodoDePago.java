@@ -13,7 +13,7 @@ public class MetodoDePago extends JFrame {
     private String pelicula;
     private String horario;
     private String sala;
-    private int montoTotal;
+   private int montoTotal;
 
     public MetodoDePago(String pelicula, String horario, String sala, int montoTotal) {
         SwingUtilities.invokeLater(() -> {
@@ -52,7 +52,7 @@ public class MetodoDePago extends JFrame {
         panelMetodoPago.setBorder(BorderFactory.createTitledBorder("Método de Pago"));
 
         // Información de la película y monto total
-        JLabel infoPelicula = new JLabel("Película: " + pelicula + " | Horario: " + horario + " | Sala: " + sala);
+        JLabel infoPelicula = new JLabel("Película: " + pelicula + " -  Horario: " + horario + " -  Sala: " + sala);
         infoPelicula.setFont(new Font("Arial", Font.BOLD, 14));
         panelMetodoPago.add(infoPelicula, BorderLayout.NORTH);
 
@@ -119,27 +119,32 @@ public class MetodoDePago extends JFrame {
     return panelBotones;
 }
 
-    private void manejarConfirmacionPago() {
-        JRadioButton opcionSeleccionada = obtenerBotonSeleccionado();
-        if (opcionSeleccionada != null) {
-            String metodoPago = opcionSeleccionada.getText();
-            String detallesPago = obtenerDetallesPago(metodoPago);
-            String informacionAdicional = mostrarDialogoEntrada(detallesPago);
+   private void manejarConfirmacionPago() {
+    JRadioButton opcionSeleccionada = obtenerBotonSeleccionado();
+    if (opcionSeleccionada != null) {
+        String metodoPago = opcionSeleccionada.getText();
+        String detallesPago = obtenerDetallesPago(metodoPago);
+        String informacionAdicional = mostrarDialogoEntrada(detallesPago);
 
-            if (informacionAdicional != null) {
-                if (confirmarCompra(metodoPago, informacionAdicional)) {
-                    System.out.println("Compra confirmada con " + metodoPago);
-                    dispose();
-                } else {
-                    System.out.println("Compra cancelada");
-                }
+        if (informacionAdicional != null) {
+            if (confirmarCompra(metodoPago, informacionAdicional)) {
+                System.out.println("Compra confirmada con " + metodoPago);
+
+                // Instanciar la factura y mostrar la ventana de Factura
+                Factura factura = new Factura(metodoPago, pelicula, horario, sala, montoTotal);
+                factura.setVisible(true);
+
+                dispose(); // Cierra la ventana actual (MetodoDePago)
             } else {
-                JOptionPane.showMessageDialog(this, "Debe completar todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
+                System.out.println("Compra cancelada");
             }
         } else {
-            System.out.println("Por favor, seleccione un método de pago");
+            JOptionPane.showMessageDialog(this, "Debe completar todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
         }
+    } else {
+        System.out.println("Por favor, seleccione un método de pago");
     }
+}
 
     private String obtenerDetallesPago(String metodoPago) {
         switch (metodoPago) {
