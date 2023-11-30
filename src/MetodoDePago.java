@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.URL;
+import java.util.List;
 
 public class MetodoDePago extends JFrame {
 
@@ -13,14 +14,16 @@ public class MetodoDePago extends JFrame {
     private String pelicula;
     private String horario;
     private String sala;
-   private int montoTotal;
+    private int montoTotal;
+    private List<String> asientosReservados;
 
-    public MetodoDePago(String pelicula, String horario, String sala, int montoTotal) {
+    public MetodoDePago(String pelicula, String horario, String sala, int montoTotal, List<String> asientosReservados) {
         SwingUtilities.invokeLater(() -> {
             this.pelicula = pelicula;
             this.horario = horario;
             this.sala = sala;
             this.montoTotal = montoTotal;
+            this.asientosReservados = asientosReservados;
 
             iniciarComponentes();
             setVisible(true);
@@ -44,107 +47,116 @@ public class MetodoDePago extends JFrame {
         add(panelBotones, BorderLayout.SOUTH);
     }
 
-    private JPanel crearPanelMetodoPago() {
-        JPanel panelMetodoPago = new JPanel();
-        panelMetodoPago.setLayout(new BorderLayout());
+   private JPanel crearPanelMetodoPago() {
+    JPanel panelMetodoPago = new JPanel();
+    panelMetodoPago.setLayout(new BorderLayout());
 
-        // Título en un borde
-        panelMetodoPago.setBorder(BorderFactory.createTitledBorder("Método de Pago"));
+    // Título en un borde
+    panelMetodoPago.setBorder(BorderFactory.createTitledBorder("Método de Pago"));
 
-        // Información de la película y monto total
-        JLabel infoPelicula = new JLabel("Película: " + pelicula + " -  Horario: " + horario + " -  Sala: " + sala);
-        infoPelicula.setFont(new Font("Arial", Font.BOLD, 14));
-        panelMetodoPago.add(infoPelicula, BorderLayout.NORTH);
+    // Información de la película, monto total y asientos reservados
+    JLabel infoPelicula = new JLabel("Película: " + pelicula + " -  Horario: " + horario + " -  Sala: " + sala);
+    infoPelicula.setFont(new Font("Arial", Font.BOLD, 14));
+    panelMetodoPago.add(infoPelicula, BorderLayout.NORTH);
 
-        JLabel infoMontoTotal = new JLabel("Monto Total a Pagar: $" + montoTotal);
-        infoMontoTotal.setFont(new Font("Arial", Font.BOLD, 14));
-        panelMetodoPago.add(infoMontoTotal, BorderLayout.CENTER);
+    // Combine las etiquetas infoMontoTotal e infoAsientosReservados en un solo panel
+    JPanel panelInfo = new JPanel(new GridLayout(2, 1));
+    
+    JLabel infoMontoTotal = new JLabel("Monto Total a Pagar: $" + montoTotal);
+    infoMontoTotal.setFont(new Font("Arial", Font.BOLD, 14));
+    panelInfo.add(infoMontoTotal);
 
-        JPanel panelOpciones = new JPanel(new GridLayout(0, 2, 10, 10));
-        panelOpciones.setBackground(new Color(255, 204, 0));
+    JLabel infoAsientosReservados = new JLabel("Asientos Reservados: " + obtenerAsientosReservadosComoString());
+    infoAsientosReservados.setFont(new Font("Arial", Font.BOLD, 14));
+    panelInfo.add(infoAsientosReservados);
 
-        // Imágenes para cada opción de pago
-        ImageIcon iconoEfectivo = cargarImagen("efectivo.png");
-        ImageIcon iconoTarjetaCredito = cargarImagen("tarjeta_credito.png");
-        ImageIcon iconoTarjetaDebito = cargarImagen("tarjeta_debito.png");
+    panelMetodoPago.add(panelInfo, BorderLayout.CENTER);
 
-        btnTarjetaCredito = new JRadioButton("Tarjeta de crédito");
-        panelOpciones.add(btnTarjetaCredito);
-        panelOpciones.add(new JLabel(iconoTarjetaCredito));
+    JPanel panelOpciones = new JPanel(new GridLayout(0, 2, 10, 10));
+    panelOpciones.setBackground(new Color(255, 204, 0));
 
-        btnTarjetaDebito = new JRadioButton("Tarjeta Débito");
-        panelOpciones.add(btnTarjetaDebito);
-        panelOpciones.add(new JLabel(iconoTarjetaDebito));
+    // Imágenes para cada opción de pago
+    ImageIcon iconoEfectivo = cargarImagen("efectivo.png");
+    ImageIcon iconoTarjetaCredito = cargarImagen("tarjeta_credito.png");
+    ImageIcon iconoTarjetaDebito = cargarImagen("tarjeta_debito.png");
 
-        btnEfectivo = new JRadioButton("Efectivo");
-        panelOpciones.add(btnEfectivo);
-        panelOpciones.add(new JLabel(iconoEfectivo));
+    btnTarjetaCredito = new JRadioButton("Tarjeta de crédito");
+    panelOpciones.add(btnTarjetaCredito);
+    panelOpciones.add(new JLabel(iconoTarjetaCredito));
 
-        ButtonGroup grupo = new ButtonGroup();
-        grupo.add(btnTarjetaCredito);
-        grupo.add(btnTarjetaDebito);
-        grupo.add(btnEfectivo);
+    btnTarjetaDebito = new JRadioButton("Tarjeta Débito");
+    panelOpciones.add(btnTarjetaDebito);
+    panelOpciones.add(new JLabel(iconoTarjetaDebito));
 
-        panelMetodoPago.add(panelOpciones, BorderLayout.SOUTH);
+    btnEfectivo = new JRadioButton("Efectivo");
+    panelOpciones.add(btnEfectivo);
+    panelOpciones.add(new JLabel(iconoEfectivo));
 
-        return panelMetodoPago;
-    }
+    ButtonGroup grupo = new ButtonGroup();
+    grupo.add(btnTarjetaCredito);
+    grupo.add(btnTarjetaDebito);
+    grupo.add(btnEfectivo);
+
+    panelMetodoPago.add(panelOpciones, BorderLayout.SOUTH);
+
+    return panelMetodoPago;
+}
 
     private JPanel crearPanelBotones() {
-    JButton botonConfirmar = new JButton("Confirmar");
-    JButton botonCancelar = new JButton("Cancelar compra");
+        JButton botonConfirmar = new JButton("Confirmar");
+        JButton botonCancelar = new JButton("Cancelar compra");
 
-    JPanel panelBotones = new JPanel();
-    panelBotones.setLayout(new FlowLayout(FlowLayout.CENTER));
-    panelBotones.add(botonConfirmar);
-    panelBotones.add(botonCancelar);
+        JPanel panelBotones = new JPanel();
+        panelBotones.setLayout(new FlowLayout(FlowLayout.CENTER));
+        panelBotones.add(botonConfirmar);
+        panelBotones.add(botonCancelar);
 
-    // Establecer el color de fondo del panel de botones
-    panelBotones.setBackground(new Color(255, 204, 0)); // Cambia el color según tus preferencias
+        // Establecer el color de fondo del panel de botones
+        panelBotones.setBackground(new Color(255, 204, 0)); // Cambia el color según tus preferencias
 
-    botonConfirmar.addActionListener(new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            manejarConfirmacionPago();
-        }
-    });
+        botonConfirmar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                manejarConfirmacionPago();
+            }
+        });
 
-    botonCancelar.addActionListener(new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            manejarCancelarCompra();
-        }
-    });
+        botonCancelar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                manejarCancelarCompra();
+            }
+        });
 
-    return panelBotones;
-}
+        return panelBotones;
+    }
 
-   private void manejarConfirmacionPago() {
-    JRadioButton opcionSeleccionada = obtenerBotonSeleccionado();
-    if (opcionSeleccionada != null) {
-        String metodoPago = opcionSeleccionada.getText();
-        String detallesPago = obtenerDetallesPago(metodoPago);
-        String informacionAdicional = mostrarDialogoEntrada(detallesPago);
+    private void manejarConfirmacionPago() {
+        JRadioButton opcionSeleccionada = obtenerBotonSeleccionado();
+        if (opcionSeleccionada != null) {
+            String metodoPago = opcionSeleccionada.getText();
+            String detallesPago = obtenerDetallesPago(metodoPago);
+            String informacionAdicional = mostrarDialogoEntrada(detallesPago);
 
-        if (informacionAdicional != null) {
-            if (confirmarCompra(metodoPago, informacionAdicional)) {
-                System.out.println("Compra confirmada con " + metodoPago);
+            if (informacionAdicional != null) {
+                if (confirmarCompra(metodoPago, informacionAdicional)) {
+                    System.out.println("Compra confirmada con " + metodoPago);
 
-                // Instanciar la factura y mostrar la ventana de Factura
-                Factura factura = new Factura(metodoPago, pelicula, horario, sala, montoTotal);
-                factura.setVisible(true);
+                    // Instanciar la factura y mostrar la ventana de Factura
+                    Factura factura = new Factura(metodoPago, pelicula, horario, sala, montoTotal, asientosReservados);
+                    factura.setVisible(true);
 
-                dispose(); // Cierra la ventana actual (MetodoDePago)
+                    dispose(); // Cierra la ventana actual (MetodoDePago)
+                } else {
+                    System.out.println("Compra cancelada");
+                }
             } else {
-                System.out.println("Compra cancelada");
+                JOptionPane.showMessageDialog(this, "Debe completar todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
             }
         } else {
-            JOptionPane.showMessageDialog(this, "Debe completar todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
+            System.out.println("Por favor, seleccione un método de pago");
         }
-    } else {
-        System.out.println("Por favor, seleccione un método de pago");
     }
-}
 
     private String obtenerDetallesPago(String metodoPago) {
         switch (metodoPago) {
@@ -239,7 +251,7 @@ public class MetodoDePago extends JFrame {
 
     private boolean esNumero(String texto) {
         try {
-            Integer.parseInt(texto);
+            Integer.valueOf(texto);
             return true;
         } catch (NumberFormatException e) {
             return false;
@@ -252,10 +264,23 @@ public class MetodoDePago extends JFrame {
                 "Película: " + pelicula + "\n" +
                 "Horario: " + horario + "\n" +
                 "Sala: " + sala + "\n" +
-                "Monto Total: $" + montoTotal;
+                "Monto Total: $" + montoTotal + "\n" +
+                "Asientos Reservados: " + obtenerAsientosReservadosComoString();
 
         return JOptionPane.showConfirmDialog(this, mensajeConfirmacion,
                 "Confirmación de Compra", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION;
+    }
+
+    private String obtenerAsientosReservadosComoString() {
+        StringBuilder asientosReservadosString = new StringBuilder();
+        for (String asiento : asientosReservados) {
+            asientosReservadosString.append(asiento).append(", ");
+        }
+        if (asientosReservadosString.length() > 2) {
+            // Eliminar la coma y el espacio al final
+            asientosReservadosString.setLength(asientosReservadosString.length() - 2);
+        }
+        return asientosReservadosString.toString();
     }
 
     private void manejarCancelarCompra() {
@@ -286,6 +311,7 @@ public class MetodoDePago extends JFrame {
     }
 
     public static void main(String[] args) {
-        new MetodoDePago("Nombre de la Película", "Horario", "Sala 1", 3000);
+
+       
     }
 }

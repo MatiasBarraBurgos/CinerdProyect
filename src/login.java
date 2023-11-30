@@ -222,7 +222,7 @@ Connection cn=con.ConectarBD();
                      String tipousuario=rs.getString("tipousuario");
                      if(tipousuario.equalsIgnoreCase("Cliente")){
                          dispose();
-                         Administrador pa=new Administrador();
+                         Cartelera pa=new Cartelera();
                          pa.setVisible(true); 
                      }
                      {

@@ -2,6 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class SeleccionDeAsientos extends JFrame {
@@ -17,14 +19,15 @@ public class SeleccionDeAsientos extends JFrame {
     private JButton[][] asientos;
     private JLabel montoTotalLabel;
     private JLabel infoPeliculaLabel;
-   
+
+    private JPanel panelAsientos;
+    private List<String> asientosReservados = new ArrayList<>();
+
     public void setInfoPelicula(String nombre, String horario, String sala) {
         this.peliculaSeleccionada = nombre;
         this.horarioSeleccionado = horario;
         this.salaSeleccionada = sala;
         actualizarInfoPelicula();
-        
-    
     }
 
     public SeleccionDeAsientos() {
@@ -43,21 +46,23 @@ public class SeleccionDeAsientos extends JFrame {
     private void crearGUI() {
         JPanel panelPrincipal = new JPanel(new BorderLayout());
         panelPrincipal.setLayout(new BoxLayout(panelPrincipal, BoxLayout.Y_AXIS));
+
+        panelAsientos = new JPanel(new GridLayout(FILAS, COLUMNAS, 5, 5));
+        for (int i = 0; i < FILAS; i++) {
+            for (int j = 0; j < COLUMNAS; j++) {
+                JButton asiento = asientos[i][j];
+                asiento.setBackground(new Color(255, 204, 0));
+                asiento.addActionListener(new AsientoListener(i, j));
+                panelAsientos.add(asiento);
+            }
+        }
+
         JPanel panelPantalla = new JPanel();
         panelPantalla.setPreferredSize(new Dimension(400, 200));
         panelPantalla.setBackground(new Color(0, 0, 0));
         infoPeliculaLabel = new JLabel();
-        infoPeliculaLabel.setForeground(Color.BLACK); // Texto negro
+        infoPeliculaLabel.setForeground(Color.BLACK);
         panelPantalla.add(infoPeliculaLabel);
-
-        JPanel panelAsientos = new JPanel(new GridLayout(FILAS, COLUMNAS, 5, 5));
-        for (int i = 0; i < FILAS; i++) {
-            for (int j = 0; j < COLUMNAS; j++) {
-                JButton asiento = asientos[i][j];
-                asiento.setBackground(new Color(255, 204, 0)); // Set the background color to yellow
-                panelAsientos.add(asiento);
-            }
-        }
 
         JPanel panelInformacion = new JPanel(new FlowLayout());
         montoTotalLabel = new JLabel("Monto Total: $0");
@@ -83,7 +88,6 @@ public class SeleccionDeAsientos extends JFrame {
     private JButton crearAsientoButton(String etiqueta, int fila, int columna) {
         JButton button = new JButton(etiqueta);
         button.setPreferredSize(obtenerDimensionesSegunColumna(columna));
-        button.addActionListener(new AsientoListener(fila));
         return button;
     }
 
@@ -111,15 +115,23 @@ public class SeleccionDeAsientos extends JFrame {
 
     private class AsientoListener implements ActionListener {
         private int fila;
+        private int columna;
 
-        public AsientoListener(int fila) {
+        public AsientoListener(int fila, int columna) {
             this.fila = fila;
+            this.columna = columna;
         }
 
         @Override
         public void actionPerformed(ActionEvent e) {
             JButton asiento = (JButton) e.getSource();
-            asiento.setBackground(asiento.getBackground() == Color.GREEN ? new Color(255, 204, 0) : Color.GREEN);
+            if (asiento.getBackground() == Color.GREEN) {
+                asiento.setBackground(new Color(255, 204, 0));
+                asientosReservados.remove(LETRAS_FILA[fila] + (columna + 1));
+            } else {
+                asiento.setBackground(Color.GREEN);
+                asientosReservados.add(LETRAS_FILA[fila] + (columna + 1));
+            }
             actualizarMontoTotal();
         }
     }
@@ -131,14 +143,20 @@ public class SeleccionDeAsientos extends JFrame {
 
     private int calcularMontoTotal() {
         int montoTotal = 0;
-        for (int i = 0; i < FILAS; i++) {
-            for (int j = 0; j < COLUMNAS; j++) {
-                if (asientos[i][j].getBackground() == Color.GREEN) {
-                    montoTotal += PRECIO_POR_ASIENTO;
-                }
-            }
+        for (String asiento : asientosReservados) {
+            int fila = obtenerFilaDesdeAsiento(asiento);
+            montoTotal += PRECIO_POR_ASIENTO;
         }
         return montoTotal;
+    }
+
+    private int obtenerFilaDesdeAsiento(String asiento) {
+        for (int i = 0; i < FILAS; i++) {
+            if (asiento.startsWith(LETRAS_FILA[i])) {
+                return i;
+            }
+        }
+        return -1;
     }
 
     private class PagoListener implements ActionListener {
@@ -149,7 +167,7 @@ public class SeleccionDeAsientos extends JFrame {
             String sala = salaSeleccionada;
             int montoTotal = calcularMontoTotal();
 
-            MetodoDePago metodoDePago = new MetodoDePago(pelicula, horario, sala, montoTotal);
+            MetodoDePago metodoDePago = new MetodoDePago(pelicula, horario, sala, montoTotal, asientosReservados);
             metodoDePago.setVisible(true);
             dispose(); // Cierra la ventana actual (SeleccionDeAsientos)
         }
@@ -173,10 +191,10 @@ public class SeleccionDeAsientos extends JFrame {
     }
 
     private void actualizarInfoPelicula() {
-        infoPeliculaLabel.setText("Película: " + peliculaSeleccionada + " -  Horario: " + horarioSeleccionado + " -  Sala: " + salaSeleccionada);
+        infoPeliculaLabel.setText("Película: " + peliculaSeleccionada + " - Horario: " + horarioSeleccionado + " - Sala: " + salaSeleccionada);
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new SeleccionDeAsientos());
+        
     }
 }

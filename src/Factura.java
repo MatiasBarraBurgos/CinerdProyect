@@ -3,97 +3,104 @@ import java.awt.*;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 public class Factura extends JFrame {
 
-    public Factura(String metodoPago, String pelicula, String horario, String sala, int montoTotal) {
+    private List<String> asientosReservados;
 
-        // Configurar la ventana
-        setTitle("Boleta de Compra");
-        setSize(300, 400); // Tamaño ajustado
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    public Factura(String metodoPago, String pelicula, String horario, String sala, int montoTotal, List<String> asientosReservados) {
+        SwingUtilities.invokeLater(() -> {
+            this.asientosReservados = asientosReservados;
 
-        // Obtener la resolución de la pantalla
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+            // Configurar la ventana
+            setTitle("Boleta de Compra");
+            setSize(300, 400); // Tamaño ajustado
+            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        // Calcular la posición centrada en la pantalla
-        int x = (int) ((screenSize.getWidth() - getWidth()) / 2);
-        int y = (int) ((screenSize.getHeight() - getHeight()) / 2);
+            // Obtener la resolución de la pantalla
+            Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
-        // Establecer la posición de la ventana
-        setLocation(x, y);
+            // Calcular la posición centrada en la pantalla
+            int x = (int) ((screenSize.getWidth() - getWidth()) / 2);
+            int y = (int) ((screenSize.getHeight() - getHeight()) / 2);
 
-        // Crear el panel principal de la boleta
-        JPanel boletaPanel = new JPanel();
-        boletaPanel.setLayout(new BoxLayout(boletaPanel, BoxLayout.Y_AXIS));
-        boletaPanel.setBackground(new Color(255, 255, 255));
+            // Establecer la posición de la ventana
+            setLocation(x, y);
 
-        // Crear el encabezado con el nombre del cine
-        JLabel cineLabel = new JLabel("Cinerd");
-        cineLabel.setFont(new Font("Arial", Font.BOLD, 24));
-        cineLabel.setForeground(new Color(255, 204, 0));
-        cineLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+            // Crear el panel principal de la boleta
+            JPanel boletaPanel = new JPanel();
+            boletaPanel.setLayout(new BoxLayout(boletaPanel, BoxLayout.Y_AXIS));
+            boletaPanel.setBackground(new Color(255, 255, 255));
 
-        // Agregar espacio entre el encabezado y la fecha/hora
-        boletaPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+            // Crear el encabezado con el nombre del cine
+            JLabel cineLabel = new JLabel("Cinerd");
+            cineLabel.setFont(new Font("Arial", Font.BOLD, 24));
+            cineLabel.setForeground(new Color(255, 204, 0));
+            cineLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        // Agregar el nombre del cine al panel principal
-        boletaPanel.add(cineLabel);
+            // Agregar espacio entre el encabezado y la fecha/hora
+            boletaPanel.add(Box.createRigidArea(new Dimension(0, 10)));
 
-        // Obtener la fecha y hora actuales
-        Date fechaHoraActual = new Date();
-        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
-        SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm:ss");
+            // Agregar el nombre del cine al panel principal
+            boletaPanel.add(cineLabel);
 
-        // Crear etiquetas para la fecha y hora
-        JLabel fechaLabel = new JLabel("Fecha: " + formatoFecha.format(fechaHoraActual));
-        JLabel horaLabel = new JLabel("Hora: " + formatoHora.format(fechaHoraActual));
+            // Obtener la fecha y hora actuales
+            Date fechaHoraActual = new Date();
+            SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm:ss");
 
-        // Alinear las etiquetas al centro
-        fechaLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        horaLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+            // Crear etiquetas para la fecha y hora
+            JLabel fechaLabel = new JLabel("Fecha: " + formatoFecha.format(fechaHoraActual));
+            JLabel horaLabel = new JLabel("Hora: " + formatoHora.format(fechaHoraActual));
 
-        // Agregar las etiquetas al panel principal
-        boletaPanel.add(fechaLabel);
-        boletaPanel.add(horaLabel);
+            // Alinear las etiquetas al centro
+            fechaLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+            horaLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        // Agregar espacio después de la fecha y hora
-        boletaPanel.add(Box.createRigidArea(new Dimension(0, 20)));
+            // Agregar las etiquetas al panel principal
+            boletaPanel.add(fechaLabel);
+            boletaPanel.add(horaLabel);
 
-        // Crear detalles de la boleta y agregar al panel principal
-        boletaPanel.add(crearDetalle("Película", pelicula));
-        boletaPanel.add(crearDetalle("Horario", horario));
-        boletaPanel.add(crearDetalle("Sala", sala));
+            // Agregar espacio después de la fecha y hora
+            boletaPanel.add(Box.createRigidArea(new Dimension(0, 20)));
 
-        // Agregar espacio después de los detalles
-        boletaPanel.add(Box.createRigidArea(new Dimension(0, 20)));
+            // Crear detalles de la boleta y agregar al panel principal
+            boletaPanel.add(crearDetalle("Película", pelicula));
+            boletaPanel.add(crearDetalle("Horario", horario));
+            boletaPanel.add(crearDetalle("Sala", sala));
+            boletaPanel.add(crearDetalle("Asientos Reservados", obtenerAsientosReservadosComoString()));
 
-        // Crear el panel del monto total con un estilo llamativo
-        JLabel montoTotalLabel = new JLabel("Total: " + formatearMonto(montoTotal));
-        montoTotalLabel.setFont(new Font("Arial", Font.BOLD, 18));
-        montoTotalLabel.setForeground(new Color(255, 51, 51));
-        montoTotalLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+            // Agregar espacio después de los detalles
+            boletaPanel.add(Box.createRigidArea(new Dimension(0, 20)));
 
-        // Agregar el monto total al panel principal
-        boletaPanel.add(montoTotalLabel);
+            // Crear el panel del monto total con un estilo llamativo
+            JLabel montoTotalLabel = new JLabel("Total: " + formatearMonto(montoTotal));
+            montoTotalLabel.setFont(new Font("Arial", Font.BOLD, 18));
+            montoTotalLabel.setForeground(new Color(255, 51, 51));
+            montoTotalLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        // Agregar espacio después del monto total
-        boletaPanel.add(Box.createRigidArea(new Dimension(0, 20)));
+            // Agregar el monto total al panel principal
+            boletaPanel.add(montoTotalLabel);
 
-        // Crear el botón imprimir
-        JButton imprimirButton = new JButton("Imprimir");
-        imprimirButton.addActionListener(e -> imprimirBoleta());
-        imprimirButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+            // Agregar espacio después del monto total
+            boletaPanel.add(Box.createRigidArea(new Dimension(0, 20)));
 
-        // Agregar el botón imprimir al panel principal
-        boletaPanel.add(imprimirButton);
+            // Crear el botón imprimir
+            JButton imprimirButton = new JButton("Imprimir");
+            imprimirButton.addActionListener(e -> imprimirBoleta());
+            imprimirButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        // Agregar el panel de la boleta a la ventana
-        add(boletaPanel);
+            // Agregar el botón imprimir al panel principal
+            boletaPanel.add(imprimirButton);
 
-        // Centrar la ventana
-        setLocationRelativeTo(null);
-        setVisible(true);
+            // Agregar el panel de la boleta a la ventana
+            add(boletaPanel);
+
+            // Centrar la ventana
+            setLocationRelativeTo(null);
+            setVisible(true);
+        });
     }
 
     private JLabel crearDetalle(String etiqueta, String valor) {
@@ -117,7 +124,19 @@ public class Factura extends JFrame {
         dispose(); // Cerrar la ventana después de imprimir
     }
 
+    private String obtenerAsientosReservadosComoString() {
+        StringBuilder asientosReservadosString = new StringBuilder();
+        for (String asiento : asientosReservados) {
+            asientosReservadosString.append(asiento).append(", ");
+        }
+        if (asientosReservadosString.length() > 2) {
+            // Eliminar la coma y el espacio al final
+            asientosReservadosString.setLength(asientosReservadosString.length() - 2);
+        }
+        return asientosReservadosString.toString();
+    }
+
     public static void main(String[] args) {
-        
+       
     }
 }

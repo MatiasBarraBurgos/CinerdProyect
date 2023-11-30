@@ -5,13 +5,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class Administrador extends javax.swing.JDialog {
+public class Cartelera extends javax.swing.JDialog {
     private String peliculaSeleccionada;
     private String horarioSeleccionado;
     private String salaSeleccionada;
     private JButton ultimoBotonHorarioSeleccionado;
     
-    public Administrador(java.awt.Frame parent, boolean modal) {
+    public Cartelera(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         bloquearControlesIniciales();
@@ -19,7 +19,7 @@ public class Administrador extends javax.swing.JDialog {
    
     }
     
-    public Administrador() {
+    public Cartelera() {
         super(new javax.swing.JFrame(), true);
         initComponents();
         bloquearControlesIniciales();
@@ -76,7 +76,7 @@ public class Administrador extends javax.swing.JDialog {
     }
 
     private void relacionarConPelicula1() {
-        System.out.println("DEBUG - Relacionando horarios con Película 1 (Napoleon)");
+        System.out.println("DEBUG - Relacionando horarios con Napoleon");
         JhorarioNap.setEnabled(true);
         JhorarioNap2.setEnabled(true);
         JhorarioNap3.setEnabled(true);
@@ -84,7 +84,7 @@ public class Administrador extends javax.swing.JDialog {
     }
 
     private void relacionarConPelicula2() {
-        System.out.println("DEBUG - Relacionando horarios con Película 2 (wonka)");
+        System.out.println("DEBUG - Relacionando horarios con wonka");
         JhorarioWon1.setEnabled(true);
         JhorarioWon2.setEnabled(true);
         JhorarioWon3.setEnabled(true);
@@ -92,7 +92,7 @@ public class Administrador extends javax.swing.JDialog {
     }
 
     private void relacionarConPelicula3() {
-        System.out.println("DEBUG - Relacionando horarios con Película 3 (Aquaman 2)");
+        System.out.println("DEBUG - Relacionando horarios con Aquaman 2");
         JhorarioAq1.setEnabled(true);
         JhorarioAq2.setEnabled(true);
         JhorarioAq3.setEnabled(true);
@@ -100,7 +100,7 @@ public class Administrador extends javax.swing.JDialog {
     }
     
     private void relacionarConPelicula4() {
-        System.out.println("DEBUG - Relacionando horarios con Película 4 (Noche de Paz)");
+        System.out.println("DEBUG - Relacionando horarios con Noche de Paz");
         JhorarioNdp1.setEnabled(true);
         JhorarioNdp2.setEnabled(true);
         JhorarioNdp3.setEnabled(true);
@@ -109,7 +109,7 @@ public class Administrador extends javax.swing.JDialog {
     }
     
     private void relacionarConPelicula5() {
-        System.out.println("DEBUG - Relacionando horarios con Película 5 (Teddy)");
+        System.out.println("DEBUG - Relacionando horarios con Teddy");
         JhorarioTeddy1.setEnabled(true);
         JhorarioTeddy2.setEnabled(true);
         JhorarioTeddy3.setEnabled(true);
@@ -117,7 +117,7 @@ public class Administrador extends javax.swing.JDialog {
     }
     
     private void relacionarConPelicula6() {
-        System.out.println("DEBUG - Relacionando horarios con Película 6 (Whish)");
+        System.out.println("DEBUG - Relacionando horarios con Whish");
         JhorarioWhish1.setEnabled(true);
         JhorarioWhish2.setEnabled(true);
         JhorarioWhish3.setEnabled(true);
@@ -163,17 +163,17 @@ private boolean verificarRelacionPelicula6() {
 private boolean verificarRelacion() {
     boolean relacion = false;
 
-    if ("Pelicula 1 (Napoleon)".equals(peliculaSeleccionada)) {
+    if ("Napoleon".equals(peliculaSeleccionada)) {
         relacion = verificarRelacionPelicula1();
-    } else if ("Pelicula 2 (Wonka)".equals(peliculaSeleccionada)) {
+    } else if ("Wonka".equals(peliculaSeleccionada)) {
         relacion = verificarRelacionPelicula2();
-    } else if ("Pelicula 3 (Aquaman)".equals(peliculaSeleccionada)) {
+    } else if ("Aquaman 2".equals(peliculaSeleccionada)) {
         relacion = verificarRelacionPelicula3();
-    } else if ("Pelicula 4 (Noche de paz)".equals(peliculaSeleccionada)) {
+    } else if ("Noche de paz".equals(peliculaSeleccionada)) {
         relacion = verificarRelacionPelicula4();
-    } else if ("Pelicula 5 (Teddy)".equals(peliculaSeleccionada)) {
+    } else if ("Teddy".equals(peliculaSeleccionada)) {
         relacion = verificarRelacionPelicula5();
-    } else if ("Pelicula 6 (Whish)".equals(peliculaSeleccionada)) {
+    } else if ("Whish".equals(peliculaSeleccionada)) {
         relacion = verificarRelacionPelicula6();
     }
 
@@ -498,7 +498,7 @@ if (choice == 0) {
     // Mostrar la ventana SeleccionDeAsientos
     seleccionDeAsientos.setVisible(true);
 
-    // Cerrar la ventana Administrador
+    // Cerrar la ventana Cartelera
     dispose();
 } else if (choice == 1) {
     // Lógica para cancelar la reserva (si es necesario)
@@ -1279,22 +1279,22 @@ if (choice == 0) {
     peliculaSeleccionada = (String) ((JButton) evt.getSource()).getText();
 
     switch (peliculaSeleccionada) {
-        case "Pelicula 1 (Napoleon)":
+        case "Napoleon":
             relacionarConPelicula1();
             break;
-        case "Pelicula 2 (Wonka)":
+        case "Wonka":
             relacionarConPelicula2();
             break;
-        case "Pelicula 3 (Aquaman)":
+        case "Aquaman 2":
             relacionarConPelicula3();
             break;
-        case "Pelicula 4 (Noche de paz) ":
+        case "Noche de paz ":
             relacionarConPelicula4();
             break;
-        case "Pelicula 5 (Teddy) ":
+        case "Teddy ":
             relacionarConPelicula5();
             break;
-        case "Pelicula 6 (Whish) ":
+        case "Whish ":
             relacionarConPelicula6();
             break;
         default:
@@ -1398,7 +1398,7 @@ if (choice == 0) {
 
     private void Jpelicula3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Jpelicula3ActionPerformed
        desbloquearControlesPeliculas();
-        peliculaSeleccionada = "Pelicula 3 (Aquaman)";
+        peliculaSeleccionada = "Aquaman 2";
         relacionarConPelicula3();
        
         desbloquearSala3();
@@ -1406,7 +1406,7 @@ if (choice == 0) {
 
     private void Jpelicula1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Jpelicula1ActionPerformed
         desbloquearControlesPeliculas();
-        peliculaSeleccionada = "Pelicula 1 (Napoleon)";
+        peliculaSeleccionada = "Napoleon";
         relacionarConPelicula1();
     
         
@@ -1416,7 +1416,7 @@ if (choice == 0) {
 
     private void Jpelicula2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Jpelicula2ActionPerformed
         desbloquearControlesPeliculas();
-        peliculaSeleccionada = "Pelicula 2 (Wonka)";
+        peliculaSeleccionada = "Wonka";
         relacionarConPelicula2();
        
         desbloquearSala2();
@@ -1424,7 +1424,7 @@ if (choice == 0) {
 
     private void Jpelicula4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Jpelicula4ActionPerformed
        desbloquearControlesPeliculas();
-       peliculaSeleccionada = "Pelicula 4  (Noche de paz)";
+       peliculaSeleccionada = "Noche de paz";
        relacionarConPelicula4();
       
        desbloquearSala4();
@@ -1432,7 +1432,7 @@ if (choice == 0) {
 
     private void Jpelicula5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Jpelicula5ActionPerformed
        desbloquearControlesPeliculas();
-       peliculaSeleccionada = "Pelicula 5  (Teddy)";
+       peliculaSeleccionada = "Teddy";
        relacionarConPelicula5();
       
        desbloquearSala5();
@@ -1440,7 +1440,7 @@ if (choice == 0) {
 
     private void Jpelicula6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Jpelicula6ActionPerformed
        desbloquearControlesPeliculas();
-       peliculaSeleccionada = "Pelicula 6 (Whish)";
+       peliculaSeleccionada = "Whish";
        relacionarConPelicula6();
       
        desbloquearSala6();
@@ -1606,8 +1606,9 @@ if (choice == 0) {
                 }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Administrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Cartelera.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
         
         //</editor-fold>
@@ -1616,7 +1617,7 @@ if (choice == 0) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                Administrador dialog = new Administrador(new javax.swing.JFrame(), true);
+                Cartelera dialog = new Cartelera(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
