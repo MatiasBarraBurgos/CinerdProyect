@@ -551,44 +551,44 @@ if (choice == 0) {
     if (peliculaSeleccionada != null) {
         // Muestra detalles de la película según la selección actual
         switch (peliculaSeleccionada) {
-            case "Pelicula 1 (Napoleon)":
-                mostrarSinopsis("Sinopsis: "+"\n"
+            case "Napoleon":
+                mostrarSinopsis("Sinopsis Pelicula Napoleon: "+"\n"
                                + "Con un impresionante telón de fondo de filmación a gran escala orquestada por el legendario director Ridley Scott,"+"\n"
                                + "la película captura el implacable viaje de Bonaparte al poder y su volátil relación con Josefina ,ademas de que nos"+"\n"
                                + "Muestra tácticas militares y políticas contra secuencias de batallas dinámicas.");
                 break;
-            case "Pelicula 2 (Wonka)":
-                mostrarSinopsis("Sinopsis: "+"\n"
+            case "Wonka":
+                mostrarSinopsis("Sinopsis Pelicula Wonka: "+"\n"
                                 +"Basado en el extraordinario personaje central de Charlie y la fábrica de chocolate, \n"
                                 + "el libro infantil más icónico de Roald Dahl y uno de los libros infantiles más vendidos de todos los tiempos, \n"
                                 + "\"Wonka\" cuenta la maravillosa historia de cómo el mayor inventor, mago y chocolatero se convirtió en el amado \n"
                                 + "Willy Wonka que conocemos hoy. Una embriagadora mezcla de magia y música, caos y emoción, \n"
                                 + "todo contado con un corazón y un humor fabulosos.");
                 break;
-            case "Pelicula 3 (Aquaman)":
-                mostrarSinopsis("Sinopsis: "+"\n"
+            case "Aquaman 2":
+                mostrarSinopsis("Sinopsis Aquaman 2: "+"\n"
                                  +"Al no poder derrotar a Aquaman la primera vez, Black Manta, todavía impulsado por la necesidad de vengar la muerte de su padre, \n"
                                  + "no se detendrá ante nada para acabar con Aquaman de una vez por todas. Esta vez Black Manta es más formidable que nunca \n"
                                  + "y ejerce el poder del mítico Tridente Negro, que desata una fuerza antigua y malévola. Para derrotarlo, Aquaman recurrirá a su \n"
                                  + "hermano encarcelado Orm, el ex rey de Atlantis, para forjar una alianza improbable. Juntos, deben dejar de lado sus diferencias \n"
                                  + "para proteger su reino y salvar a la familia de Aquaman y al mundo de una destrucción irreversible.");
                 break;
-            case "Pelicula 4 (Noche de paz)":
-               mostrarSinopsis( "Sinopsis: "+"\n"
+            case "Noche de Paz":
+               mostrarSinopsis( "Sinopsis Pelicula Noche de Paz: "+"\n"
                                 +"Nochebuena. Un padre atormentado (Joel Kinnaman) es testigo de la muerte de su hijo cuando éste queda atrapado en un fuego cruzado \n"
                                 + "entre bandas. Roto de dolor y sin voz, debido a una herida profunda que afecta sus cuerdas vocales, decidirá someterse a un estricto \n"
                                 + "entrenamiento para vengar su muerte.");
                 break;
-            case "Pelicula 5 (Teddy)":
-               mostrarSinopsis("Sinopsis: "+"\n"
+            case "Teddy":
+               mostrarSinopsis("Sinopsis Pelicula Teddy: "+"\n"
                                 +"Al no poder derrotar a Aquaman la primera vez, Black Manta, todavía impulsado por la necesidad de vengar la muerte de su padre, \n"
                                 + "no se detendrá ante nada para acabar con Aquaman de una vez por todas. Esta vez Black Manta es más formidable que nunca y ejerce el poder \n"
                                 + "del mítico Tridente Negro, que desata una fuerza antigua y malévola. Para derrotarlo, Aquaman recurrirá a su hermano encarcelado Orm, el \n"
                                 + "ex rey de Atlantis, para forjar una alianza improbable. Juntos, deben dejar de lado sus diferencias para proteger su reino y salvar a la \n"
                                 + "familia de Aquaman y al mundo de una destrucción irreversible.");
                 break;
-            case "Pelicula 6 (Whish)":
-                mostrarSinopsis("Sinopsis: "+"\n"
+            case "Whish":
+                mostrarSinopsis("Sinopsis Pelicula Whish: "+"\n"
                                 +"El Poder de los Deseos de Walt Disney Animation Studios es una comedia musical animada que invita a la audiencia a visitar el reino mágico de Rosas, \n"
                                 + "donde Asha, una idealista ingeniosa, pide un deseo tan poderoso que es respondido por una fuerza cósmica, una pequeña esfera de energía infinita llamada Star. \n"
                                 + "Juntos, Asha y Star se enfrentan al enemigo más temible de todos, el rey Magnifico de Rosas, para salvar a la comunidad y demostrar que suceden cosas maravillosas \n"
