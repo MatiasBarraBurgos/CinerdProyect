@@ -169,7 +169,7 @@ public class SeleccionDeAsientos extends JFrame {
 
             MetodoDePago metodoDePago = new MetodoDePago(pelicula, horario, sala, montoTotal, asientosReservados);
             metodoDePago.setVisible(true);
-            dispose(); // Cierra la ventana actual (SeleccionDeAsientos)
+            dispose(); // Cierra la ventana SeleccionDeAsientos
         }
     }
 

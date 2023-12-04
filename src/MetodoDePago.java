@@ -51,15 +51,15 @@ public class MetodoDePago extends JFrame {
     JPanel panelMetodoPago = new JPanel();
     panelMetodoPago.setLayout(new BorderLayout());
 
-    // Título en un borde
+    // Título , que es puesto en el borde
     panelMetodoPago.setBorder(BorderFactory.createTitledBorder("Método de Pago"));
 
-    // Información de la película, monto total y asientos reservados
+    // Información de la película.
     JLabel infoPelicula = new JLabel("Película: " + pelicula + " -  Horario: " + horario + " -  Sala: " + sala);
     infoPelicula.setFont(new Font("Arial", Font.BOLD, 14));
     panelMetodoPago.add(infoPelicula, BorderLayout.NORTH);
 
-    // Combine las etiquetas infoMontoTotal e infoAsientosReservados en un solo panel
+    // Combinamos las etiquetas infoMontoTotal e infoAsientosReservados en un solo panel
     JPanel panelInfo = new JPanel(new GridLayout(2, 1));
     
     JLabel infoMontoTotal = new JLabel("Monto Total a Pagar: $" + montoTotal);
@@ -112,7 +112,7 @@ public class MetodoDePago extends JFrame {
         panelBotones.add(botonCancelar);
 
         // Establecer el color de fondo del panel de botones
-        panelBotones.setBackground(new Color(255, 204, 0)); // Cambia el color según tus preferencias
+        panelBotones.setBackground(new Color(255, 204, 0)); 
 
         botonConfirmar.addActionListener(new ActionListener() {
             @Override
@@ -146,7 +146,7 @@ public class MetodoDePago extends JFrame {
                     Factura factura = new Factura(metodoPago, pelicula, horario, sala, montoTotal, asientosReservados);
                     factura.setVisible(true);
 
-                    dispose(); // Cierra la ventana actual (MetodoDePago)
+                    dispose(); // Cerramos la ventana actual MetodoDePago.
                 } else {
                     System.out.println("Compra cancelada");
                 }

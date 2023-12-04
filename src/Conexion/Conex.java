@@ -1,4 +1,3 @@
-
 package Conexion;
 
 import com.mysql.jdbc.Connection;

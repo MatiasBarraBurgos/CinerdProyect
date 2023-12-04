@@ -15,8 +15,6 @@ public class Cartelera extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         bloquearControlesIniciales();
-        
-   
     }
     
     public Cartelera() {
@@ -25,7 +23,6 @@ public class Cartelera extends javax.swing.JDialog {
         bloquearControlesIniciales();
     }
     
-   
     private void bloquearControlesIniciales() {
         JComboSeleccion1.setEnabled(false);
         JComboSeleccion2.setEnabled(false);
@@ -124,61 +121,70 @@ public class Cartelera extends javax.swing.JDialog {
         JComboSeleccion6.setEnabled(true);
     }
     
-private boolean verificarRelacionPelicula1() {
-    return JhorarioNap.isSelected() && JComboSeleccion1.getSelectedIndex() != -1 ||
-           JhorarioNap2.isSelected() && JComboSeleccion1.getSelectedIndex() != -1 ||
-           JhorarioNap3.isSelected() && JComboSeleccion1.getSelectedIndex() != -1;
-}
+    private boolean verificarRelacionPelicula1() {
+        return JhorarioNap.isSelected() && JComboSeleccion1.getSelectedIndex() != -1 ||
+        JhorarioNap2.isSelected() && JComboSeleccion1.getSelectedIndex() != -1 ||
+        JhorarioNap3.isSelected() && JComboSeleccion1.getSelectedIndex() != -1;
+    }
 
 private boolean verificarRelacionPelicula2() {
-    return JhorarioWon1.isSelected() && JComboSeleccion2.getSelectedIndex() != -1 ||
-           JhorarioWon2.isSelected() && JComboSeleccion2.getSelectedIndex() != -1 ||
-           JhorarioWon3.isSelected() && JComboSeleccion2.getSelectedIndex() != -1;
-}
+        return JhorarioWon1.isSelected() && JComboSeleccion2.getSelectedIndex() != -1 ||
+        JhorarioWon2.isSelected() && JComboSeleccion2.getSelectedIndex() != -1 ||
+        JhorarioWon3.isSelected() && JComboSeleccion2.getSelectedIndex() != -1;
+    }
 
 private boolean verificarRelacionPelicula3() {
-    return JhorarioAq1.isSelected() && JComboSeleccion3.getSelectedIndex() != -1 ||
-           JhorarioAq2.isSelected() && JComboSeleccion3.getSelectedIndex() != -1 ||
-           JhorarioAq3.isSelected() && JComboSeleccion3.getSelectedIndex() != -1;
-}
+        return JhorarioAq1.isSelected() && JComboSeleccion3.getSelectedIndex() != -1 ||
+        JhorarioAq2.isSelected() && JComboSeleccion3.getSelectedIndex() != -1 ||
+        JhorarioAq3.isSelected() && JComboSeleccion3.getSelectedIndex() != -1;
+    }
 
 private boolean verificarRelacionPelicula4() {
-    return JhorarioNdp1.isSelected() && JComboSeleccion4.getSelectedIndex() != -1 ||
-           JhorarioNdp2.isSelected() && JComboSeleccion4.getSelectedIndex() != -1 ||
-           JhorarioNdp3.isSelected() && JComboSeleccion4.getSelectedIndex() != -1;
-}
+        return JhorarioNdp1.isSelected() && JComboSeleccion4.getSelectedIndex() != -1 ||
+        JhorarioNdp2.isSelected() && JComboSeleccion4.getSelectedIndex() != -1 ||
+        JhorarioNdp3.isSelected() && JComboSeleccion4.getSelectedIndex() != -1;
+    }
 
 private boolean verificarRelacionPelicula5() {
-    return JhorarioTeddy1.isSelected() && JComboSeleccion5.getSelectedIndex() != -1 ||
-           JhorarioTeddy2.isSelected() && JComboSeleccion5.getSelectedIndex() != -1 ||
-           JhorarioTeddy3.isSelected() && JComboSeleccion5.getSelectedIndex() != -1;
-}
+        return JhorarioTeddy1.isSelected() && JComboSeleccion5.getSelectedIndex() != -1 ||
+        JhorarioTeddy2.isSelected() && JComboSeleccion5.getSelectedIndex() != -1 ||
+        JhorarioTeddy3.isSelected() && JComboSeleccion5.getSelectedIndex() != -1;
+    }
 
 private boolean verificarRelacionPelicula6() {
-    return JhorarioWhish1.isSelected() && JComboSeleccion6.getSelectedIndex() != -1 ||
-           JhorarioWhish2.isSelected() && JComboSeleccion6.getSelectedIndex() != -1 ||
-           JhorarioWhish3.isSelected() && JComboSeleccion6.getSelectedIndex() != -1;
-}
+        return JhorarioWhish1.isSelected() && JComboSeleccion6.getSelectedIndex() != -1 ||
+        JhorarioWhish2.isSelected() && JComboSeleccion6.getSelectedIndex() != -1 ||
+        JhorarioWhish3.isSelected() && JComboSeleccion6.getSelectedIndex() != -1;
+    }
 
 private boolean verificarRelacion() {
     boolean relacion = false;
 
-    if ("Napoleon".equals(peliculaSeleccionada)) {
-        relacion = verificarRelacionPelicula1();
-    } else if ("Wonka".equals(peliculaSeleccionada)) {
-        relacion = verificarRelacionPelicula2();
-    } else if ("Aquaman 2".equals(peliculaSeleccionada)) {
-        relacion = verificarRelacionPelicula3();
-    } else if ("Noche de paz".equals(peliculaSeleccionada)) {
-        relacion = verificarRelacionPelicula4();
-    } else if ("Teddy".equals(peliculaSeleccionada)) {
-        relacion = verificarRelacionPelicula5();
-    } else if ("Whish".equals(peliculaSeleccionada)) {
-        relacion = verificarRelacionPelicula6();
-    }
+    if (null != peliculaSeleccionada) switch (peliculaSeleccionada) {
+            case "Napoleon":
+                relacion = verificarRelacionPelicula1();
+                break;
+            case "Wonka":
+                relacion = verificarRelacionPelicula2();
+                break;
+            case "Aquaman 2":
+                relacion = verificarRelacionPelicula3();
+                break;
+            case "Noche de paz":
+                relacion = verificarRelacionPelicula4();
+                break;
+            case "Teddy":
+                relacion = verificarRelacionPelicula5();
+                break;
+            case "Whish":
+                relacion = verificarRelacionPelicula6();
+                break;
+            default:
+                break;
+        }
 
     return relacion;
-}
+    }
     
     private void bloquearNoRelacionadosConPelicula1() {
         JhorarioNap.setEnabled(true);
@@ -357,83 +363,77 @@ private boolean verificarRelacion() {
     }
     
    private void desbloquearHorarios() {
-    // Desseleccionar horarios para la película "Napoleon"
-    JhorarioNap.setSelected(true);
-    JhorarioNap2.setSelected(true);
-    JhorarioNap3.setSelected(true);
+        // Desseleccionar horarios para la película "Napoleon"
+        JhorarioNap.setSelected(true);
+        JhorarioNap2.setSelected(true);
+        JhorarioNap3.setSelected(true);
 
-    // Desseleccionar horarios para la película "Wonka"
-    JhorarioWon1.setSelected(true);
-    JhorarioWon2.setSelected(true);
-    JhorarioWon3.setSelected(true);
+        // Desseleccionar horarios para la película "Wonka"
+        JhorarioWon1.setSelected(true);
+        JhorarioWon2.setSelected(true);
+        JhorarioWon3.setSelected(true);
 
-    // Desseleccionar horarios para la película "Aquaman"
-    JhorarioAq1.setSelected(true);
-    JhorarioAq2.setSelected(true);
-    JhorarioAq3.setSelected(true);
+        // Desseleccionar horarios para la película "Aquaman"
+        JhorarioAq1.setSelected(true);
+        JhorarioAq2.setSelected(true);
+        JhorarioAq3.setSelected(true);
 
-    // Desseleccionar horarios para la película "Noche de paz"
-    JhorarioNdp1.setSelected(true);
-    JhorarioNdp2.setSelected(true);
-    JhorarioNdp3.setSelected(true);
+        // Desseleccionar horarios para la película "Noche de paz"
+        JhorarioNdp1.setSelected(true);
+        JhorarioNdp2.setSelected(true);
+        JhorarioNdp3.setSelected(true);
 
-    // Desseleccionar horarios para la película "Teddy"
-    JhorarioTeddy1.setSelected(true);
-    JhorarioTeddy2.setSelected(true);
-    JhorarioTeddy3.setSelected(true);
+        // Desseleccionar horarios para la película "Teddy"
+        JhorarioTeddy1.setSelected(true);
+        JhorarioTeddy2.setSelected(true);
+        JhorarioTeddy3.setSelected(true);
 
-    // Desseleccionar horarios para la película "Whish"
-    JhorarioWhish1.setSelected(true);
-    JhorarioWhish2.setSelected(true);
-    JhorarioWhish3.setSelected(true);
+        // Desseleccionar horarios para la película "Whish"
+        JhorarioWhish1.setSelected(true);
+        JhorarioWhish2.setSelected(true);
+        JhorarioWhish3.setSelected(true);
 
-    // Además, puedes reiniciar la variable horarioSeleccionado a un valor por defecto si es necesario
+    
     horarioSeleccionado = "";
 }
    private void desbloquearSala1() {
-    // Desbloquear los combo box de salas
-    JComboSeleccion1.setEnabled(true);
+        JComboSeleccion1.setEnabled(true);
 }
    private void desbloquearSala2() {
-    // Desbloquear los combo box de salas
-    JComboSeleccion2.setEnabled(true);
+        JComboSeleccion2.setEnabled(true);
 }
    private void desbloquearSala3() {
-    // Desbloquear los combo box de salas
-    JComboSeleccion3.setEnabled(true);
+        JComboSeleccion3.setEnabled(true);
 }
    private void desbloquearSala4() {
-    // Desbloquear los combo box de salas
-    JComboSeleccion4.setEnabled(true);
+        JComboSeleccion4.setEnabled(true);
 }
    private void desbloquearSala5() {
-    // Desbloquear los combo box de salas
-    JComboSeleccion5.setEnabled(true);
+        JComboSeleccion5.setEnabled(true);
 }
    private void desbloquearSala6() {
-    // Desbloquear los combo box de salas
-    JComboSeleccion6.setEnabled(true);
+        JComboSeleccion6.setEnabled(true);
 }
    
     private void actualizarControlesHorarioSeleccionado() {
-    JhorarioNap.setSelected(false);
-    JhorarioNap2.setSelected(false);
-    JhorarioNap3.setSelected(false);
-    JhorarioWon1.setSelected(false);
-    JhorarioWon2.setSelected(false);
-    JhorarioWon3.setSelected(false);
-    JhorarioAq1.setSelected(false);
-    JhorarioAq2.setSelected(false);
-    JhorarioAq3.setSelected(false);
-    JhorarioNdp1.setSelected(false);
-    JhorarioNdp2.setSelected(false);
-    JhorarioNdp3.setSelected(false);
-    JhorarioTeddy1.setSelected(false);
-    JhorarioTeddy2.setSelected(false);
-    JhorarioTeddy3.setSelected(false);
-    JhorarioWhish1.setSelected(false);
-    JhorarioWhish2.setSelected(false);
-    JhorarioWhish3.setSelected(false);
+        JhorarioNap.setSelected(false);
+        JhorarioNap2.setSelected(false);
+        JhorarioNap3.setSelected(false);
+        JhorarioWon1.setSelected(false);
+        JhorarioWon2.setSelected(false);
+        JhorarioWon3.setSelected(false);
+        JhorarioAq1.setSelected(false);
+        JhorarioAq2.setSelected(false);
+        JhorarioAq3.setSelected(false);
+        JhorarioNdp1.setSelected(false);
+        JhorarioNdp2.setSelected(false);
+        JhorarioNdp3.setSelected(false);
+        JhorarioTeddy1.setSelected(false);
+        JhorarioTeddy2.setSelected(false);
+        JhorarioTeddy3.setSelected(false);
+        JhorarioWhish1.setSelected(false);
+        JhorarioWhish2.setSelected(false);
+        JhorarioWhish3.setSelected(false);
 
     //  esto ctiva la selección en el último botón de horario seleccionado
     if (ultimoBotonHorarioSeleccionado != null) {
@@ -442,29 +442,38 @@ private boolean verificarRelacion() {
 }
   private void bloquearHorariosNoRelacionados() {
         System.out.println("DEBUG - Bloqueando horarios no relacionados para: " + peliculaSeleccionada);
-        if ("Napoleon ".equals(peliculaSeleccionada)) {
-            bloquearNoRelacionadosConPelicula1();
-            bloquearPelicula2345y6();
-        } else if ("Wonka ".equals(peliculaSeleccionada)) {
-            bloquearNoRelacionadosConPelicula2();
-            bloquearPelicula1345y6();
-        } else if ("Aquaman 2 ".equals(peliculaSeleccionada)) {
-            bloquearNoRelacionadosConPelicula3();
-            bloquearPelicula1245y6();
-        } else if ("Noche de paz ".equals(peliculaSeleccionada)) {
-            bloquearNoRelacionadosConPelicula4();
-            bloquearPelicula1235y6();
-        } else if ("Teddy ".equals(peliculaSeleccionada)) {
-            bloquearNoRelacionadosConPelicula5();
-            bloquearPelicula1234y6();
-        } else if ("Whish ".equals(peliculaSeleccionada)) {
-            bloquearNoRelacionadosConPelicula6();
-            bloquearPelicula1234y5();
+        if (null != peliculaSeleccionada) switch (peliculaSeleccionada) {
+            case "Napoleon ":
+                bloquearNoRelacionadosConPelicula1();
+                bloquearPelicula2345y6();
+                break;
+            case "Wonka ":
+                bloquearNoRelacionadosConPelicula2();
+                bloquearPelicula1345y6();
+                break;
+            case "Aquaman 2 ":
+                bloquearNoRelacionadosConPelicula3();
+                bloquearPelicula1245y6();
+                break;
+            case "Noche de paz ":
+                bloquearNoRelacionadosConPelicula4();
+                bloquearPelicula1235y6();
+                break;
+            case "Teddy ":
+                bloquearNoRelacionadosConPelicula5();
+                bloquearPelicula1234y6();
+                break;
+            case "Whish ":
+                bloquearNoRelacionadosConPelicula6();
+                bloquearPelicula1234y5();
+                break;
+            default:
+                break;
         }
     }
   
   
- private void realizarReserva() {
+     private void realizarReserva() {
     if (peliculaSeleccionada != null && horarioSeleccionado != null && salaSeleccionada != null) {
         // Verificar que el horario y la sala estén relacionados con la película seleccionada
         if (verificarRelacion()) {
@@ -501,7 +510,6 @@ if (choice == 0) {
     // Cerrar la ventana Cartelera
     dispose();
 } else if (choice == 1) {
-    // Lógica para cancelar la reserva (si es necesario)
     cancelarReserva();
 
 }
@@ -516,12 +524,7 @@ if (choice == 0) {
        
 }
  private void cancelarReserva() {
-    // Lógica para cancelar la reserva
-
-    // Desbloquear horarios que se bloquearon durante la reserva
     bloquearControlesIniciales();
-
-    // Mostrar un mensaje indicando que la reserva ha sido cancelada
     JOptionPane.showMessageDialog(this, "Reserva cancelada", "Cancelación de Reserva", JOptionPane.INFORMATION_MESSAGE);
 }
  
@@ -540,9 +543,8 @@ if (choice == 0) {
             
         }
     } catch (SQLException ex) {
-// Manejar la excepción, por ejemplo, imprimir el error
-                    ex.printStackTrace();
-                    JOptionPane.showMessageDialog(this, "Error al guardar la reserva en la base de datos.", "Error", JOptionPane.ERROR_MESSAGE);
+       // imprimir el error
+        JOptionPane.showMessageDialog(this, "Error al guardar la reserva en la base de datos.", "Error", JOptionPane.ERROR_MESSAGE);
     }
 }
 
@@ -1310,8 +1312,6 @@ if (choice == 0) {
     ultimoBotonHorarioSeleccionado = JhorarioNap;
     actualizarControlesHorarioSeleccionado();
    
-    
-     
     desbloquearSala1();
 
     }//GEN-LAST:event_JhorarioNapActionPerformed
@@ -1329,17 +1329,15 @@ if (choice == 0) {
     ultimoBotonHorarioSeleccionado = JhorarioNap3;
     actualizarControlesHorarioSeleccionado();
     
-    
     desbloquearSala1();
     }//GEN-LAST:event_JhorarioNap3ActionPerformed
 
     private void JhorarioWon1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JhorarioWon1ActionPerformed
     horarioSeleccionado = "11:00 ";
     ultimoBotonHorarioSeleccionado = JhorarioWon1;
-   actualizarControlesHorarioSeleccionado();
+    actualizarControlesHorarioSeleccionado();
      
-    desbloquearSala2();
-                 
+    desbloquearSala2();            
     }//GEN-LAST:event_JhorarioWon1ActionPerformed
 
     private void JhorarioWon2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JhorarioWon2ActionPerformed
@@ -1361,7 +1359,7 @@ if (choice == 0) {
     private void JhorarioAq1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JhorarioAq1ActionPerformed
     horarioSeleccionado = "14:00 ";
     ultimoBotonHorarioSeleccionado = JhorarioAq1;
-   actualizarControlesHorarioSeleccionado();
+    actualizarControlesHorarioSeleccionado();
      
     desbloquearSala3();
     }//GEN-LAST:event_JhorarioAq1ActionPerformed
@@ -1369,7 +1367,7 @@ if (choice == 0) {
     private void JhorarioAq2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JhorarioAq2ActionPerformed
     horarioSeleccionado = "17:00 ";
     ultimoBotonHorarioSeleccionado = JhorarioAq2;
-   actualizarControlesHorarioSeleccionado();
+    actualizarControlesHorarioSeleccionado();
      
     desbloquearSala3();
     }//GEN-LAST:event_JhorarioAq2ActionPerformed
@@ -1397,59 +1395,58 @@ if (choice == 0) {
     }//GEN-LAST:event_JComboSeleccion1ActionPerformed
 
     private void Jpelicula3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Jpelicula3ActionPerformed
-       desbloquearControlesPeliculas();
-        peliculaSeleccionada = "Aquaman 2";
-        relacionarConPelicula3();
+    desbloquearControlesPeliculas();
+    peliculaSeleccionada = "Aquaman 2";
+    relacionarConPelicula3();
        
-        desbloquearSala3();
+    desbloquearSala3();
     }//GEN-LAST:event_Jpelicula3ActionPerformed
 
     private void Jpelicula1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Jpelicula1ActionPerformed
-        desbloquearControlesPeliculas();
-        peliculaSeleccionada = "Napoleon";
-        relacionarConPelicula1();
-    
+    desbloquearControlesPeliculas();
+    peliculaSeleccionada = "Napoleon";
+    relacionarConPelicula1();
         
-        desbloquearHorarios();
-        desbloquearSala1();
+    desbloquearHorarios();
+    desbloquearSala1();
     }//GEN-LAST:event_Jpelicula1ActionPerformed
 
     private void Jpelicula2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Jpelicula2ActionPerformed
-        desbloquearControlesPeliculas();
-        peliculaSeleccionada = "Wonka";
-        relacionarConPelicula2();
+    desbloquearControlesPeliculas();
+    peliculaSeleccionada = "Wonka";
+    relacionarConPelicula2();
        
-        desbloquearSala2();
+    desbloquearSala2();
     }//GEN-LAST:event_Jpelicula2ActionPerformed
 
     private void Jpelicula4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Jpelicula4ActionPerformed
-       desbloquearControlesPeliculas();
-       peliculaSeleccionada = "Noche de paz";
-       relacionarConPelicula4();
+    desbloquearControlesPeliculas();
+    peliculaSeleccionada = "Noche de paz";
+    relacionarConPelicula4();
       
-       desbloquearSala4();
+    desbloquearSala4();
     }//GEN-LAST:event_Jpelicula4ActionPerformed
 
     private void Jpelicula5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Jpelicula5ActionPerformed
-       desbloquearControlesPeliculas();
-       peliculaSeleccionada = "Teddy";
-       relacionarConPelicula5();
+    desbloquearControlesPeliculas();
+    peliculaSeleccionada = "Teddy";
+    relacionarConPelicula5();
       
-       desbloquearSala5();
+    desbloquearSala5();
     }//GEN-LAST:event_Jpelicula5ActionPerformed
 
     private void Jpelicula6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Jpelicula6ActionPerformed
-       desbloquearControlesPeliculas();
-       peliculaSeleccionada = "Whish";
-       relacionarConPelicula6();
+    desbloquearControlesPeliculas();
+    peliculaSeleccionada = "Whish";
+    relacionarConPelicula6();
       
-       desbloquearSala6();
+    desbloquearSala6();
     }//GEN-LAST:event_Jpelicula6ActionPerformed
 
     private void JhorarioWhish3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JhorarioWhish3ActionPerformed
     horarioSeleccionado = "17:20 ";
     ultimoBotonHorarioSeleccionado = JhorarioWhish3;
-   actualizarControlesHorarioSeleccionado();
+    actualizarControlesHorarioSeleccionado();
      
     desbloquearSala6();
     }//GEN-LAST:event_JhorarioWhish3ActionPerformed
@@ -1473,7 +1470,7 @@ if (choice == 0) {
     private void JhorarioTeddy3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JhorarioTeddy3ActionPerformed
     horarioSeleccionado = "19:00 ";
     ultimoBotonHorarioSeleccionado = JhorarioTeddy3;
-   actualizarControlesHorarioSeleccionado();
+    actualizarControlesHorarioSeleccionado();
      
     desbloquearSala5();
     }//GEN-LAST:event_JhorarioTeddy3ActionPerformed
@@ -1481,7 +1478,7 @@ if (choice == 0) {
     private void JhorarioTeddy2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JhorarioTeddy2ActionPerformed
     horarioSeleccionado = "16:30 ";
     ultimoBotonHorarioSeleccionado = JhorarioTeddy2;
-   actualizarControlesHorarioSeleccionado();
+    actualizarControlesHorarioSeleccionado();
      
     desbloquearSala5();
     }//GEN-LAST:event_JhorarioTeddy2ActionPerformed
@@ -1489,7 +1486,7 @@ if (choice == 0) {
     private void JhorarioTeddy1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JhorarioTeddy1ActionPerformed
     horarioSeleccionado = "13:50 ";
     ultimoBotonHorarioSeleccionado = JhorarioTeddy1;
-   actualizarControlesHorarioSeleccionado();
+    actualizarControlesHorarioSeleccionado();
      
     desbloquearSala5();
     }//GEN-LAST:event_JhorarioTeddy1ActionPerformed
@@ -1497,7 +1494,7 @@ if (choice == 0) {
     private void JhorarioNdp3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JhorarioNdp3ActionPerformed
     horarioSeleccionado = "18:00 ";
     ultimoBotonHorarioSeleccionado = JhorarioNdp3;
-   actualizarControlesHorarioSeleccionado();
+    actualizarControlesHorarioSeleccionado();
      
     desbloquearSala4();
     }//GEN-LAST:event_JhorarioNdp3ActionPerformed
@@ -1505,7 +1502,7 @@ if (choice == 0) {
     private void JhorarioNdp2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JhorarioNdp2ActionPerformed
     horarioSeleccionado = "16:00 ";
     ultimoBotonHorarioSeleccionado = JhorarioNdp2;
-   actualizarControlesHorarioSeleccionado();
+    actualizarControlesHorarioSeleccionado();
      
     desbloquearSala4();
     }//GEN-LAST:event_JhorarioNdp2ActionPerformed

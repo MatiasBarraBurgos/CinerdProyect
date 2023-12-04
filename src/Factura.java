@@ -13,27 +13,27 @@ public class Factura extends JFrame {
         SwingUtilities.invokeLater(() -> {
             this.asientosReservados = asientosReservados;
 
-            // Configurar la ventana
+          
             setTitle("Boleta de Compra");
-            setSize(300, 400); // Tamaño ajustado
+            setSize(300, 400); // se ajusta el tamaño de la ventana
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
             // Obtener la resolución de la pantalla
             Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
-            // Calcular la posición centrada en la pantalla
+            // ponemos la ventana al centro
             int x = (int) ((screenSize.getWidth() - getWidth()) / 2);
             int y = (int) ((screenSize.getHeight() - getHeight()) / 2);
 
-            // Establecer la posición de la ventana
+            
             setLocation(x, y);
 
-            // Crear el panel principal de la boleta
+            //panel principal
             JPanel boletaPanel = new JPanel();
             boletaPanel.setLayout(new BoxLayout(boletaPanel, BoxLayout.Y_AXIS));
             boletaPanel.setBackground(new Color(255, 255, 255));
 
-            // Crear el encabezado con el nombre del cine
+            // encabezado
             JLabel cineLabel = new JLabel("Cinerd");
             cineLabel.setFont(new Font("Arial", Font.BOLD, 24));
             cineLabel.setForeground(new Color(255, 204, 0));

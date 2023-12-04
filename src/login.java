@@ -232,26 +232,26 @@ Connection cn=con.ConectarBD();
             JOptionPane.showMessageDialog(null, "USUARIO O CONTRASEÑA INCORRECTOS");
  
                  }
-             } catch (HeadlessException | SQLException e) { 
-          JOptionPane.showMessageDialog(null, "ERROR AL INICIAR SESION"+e);
+                 }catch (HeadlessException | SQLException e) { 
+            JOptionPane.showMessageDialog(null, "ERROR AL INICIAR SESION"+e);
 
-             } 
-        }else{
+                 } 
+                 }else{
          JOptionPane.showMessageDialog(null, "DEBE COMPLETAR LOS CAMPOS");
 
          }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+       
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void txtusuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtusuarioActionPerformed
-        // TODO add your handling code here:
+   
     }//GEN-LAST:event_txtusuarioActionPerformed
 
     private void txtpasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtpasswordActionPerformed
-        // TODO add your handling code here:
+    
     }//GEN-LAST:event_txtpasswordActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

@@ -125,19 +125,19 @@ Connection cn=con.ConectarBD();
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtpasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtpasswordActionPerformed
-        // TODO add your handling code here:
+       
     }//GEN-LAST:event_txtpasswordActionPerformed
 
     private void txtcorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcorreoActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_txtcorreoActionPerformed
 
     private void combotipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combotipoActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_combotipoActionPerformed
 
     private void txtapellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtapellidoActionPerformed
-        // TODO add your handling code here:
+    
     }//GEN-LAST:event_txtapellidoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
